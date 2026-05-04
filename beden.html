@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beden Kitle İndeksi Hesaplama</title>
+    <style>
+        body { background-color:#c679d4; font-family: sans-serif; padding: 20px; justify-content: center; }
+        .input-grubu { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; }
+        input { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 10px 20px; margin:10px ; background-color: #a527a3; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #882175; }
+    </style>
+</head>
+<body>
+    <h3>BEDEN KİTLE İNDEKSİ HESAPLAMA</h3>
+
+    <div class="input">
+        <label for="kilo">Kilonuz (kg):</label>
+        <input type="number" id="kilo" >
+    </div>
+    <div class="input">
+        <label for="boy">Boyunuz (m):</label>
+        <input type="number" id="boy">
+    </div>
+
+    <button onclick="hesapla()">Hesapla</button>
+    <h3 id="sonuc">SONUÇ:</h3>
+    
+    <div id="aciklama">
+        <label for="aciklama">Açıklama:</label>
+    </div>
+
+    <script >
+        function hesapla(){
+            let kilo = document.getElementById("kilo").value;
+            let boy = document.getElementById("boy").value;
+            let sonuc = document.getElementById("sonuc");
+            let aciklama = document.getElementById("aciklama");
+
+            if(kilo > 0 && boy > 0) {
+                // Boyu metreye çeviriyoruz (Örn: 175 -> 1.75)
+                let boyMetre = boy / 100;
+                // Formül: Kilo / (Boy * Boy)
+                let bki = kilo / (boyMetre * boyMetre);
+                 sonuc.innerHTML = "Vücut Kitle İndeksiniz: " + bki.toFixed(2);
+                //açıklama 
+                if (bki < 18.5)
+            {
+                aciklama.innerHTML = "Açıklama: İdeal kilonun altında.";
+            }
+            else if (bki >= 18.5 && bki < 25)
+            {
+                aciklama.innerHTML = "Açıklama: İdeal kiloda.";
+            }
+            else if (bki >= 25 && bki < 30)
+            {
+                aciklama.innerHTML = "Açıklama: Fazla kilolu.";
+            }
+            else
+            {
+                aciklama.innerHTML = "Açıklama: Obez.";
+                
+            } 
+        }
+            else {
+                alert("Lütfen geçerli değerler giriniz!");
+            }
+        }
+    </script>
+</body>
+</html>
